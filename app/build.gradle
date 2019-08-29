@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.example.popularmovieskotlin"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //AppCompat is a set of support libraries which can be used to make the apps developed with newer versions work with older versions.
+    implementation "androidx.appcompat:appcompat:$version_appcompat"
+
+    //Android KTX
+    implementation "androidx.core:core-ktx:$version_core_ktx"
+
+    //Constraintlayout
+    implementation "androidx.constraintlayout:constraintlayout:$version_constraintlayout"
+
+    // Material design components
+    implementation "com.google.android.material:material:$version_material"
+
+    //RecyclerView
+    implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
+
+    //Navigation component
+    implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
+
+    //// ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$version_lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle"
+
+    //Test Dependencies
+    testImplementation 'junit:junit:4.12'
+
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}
