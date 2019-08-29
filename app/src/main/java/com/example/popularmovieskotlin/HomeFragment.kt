@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.popularmovieskotlin.databinding.HomeFragmentBinding
 
 
@@ -23,6 +25,12 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val binding = HomeFragmentBinding.inflate(inflater, container, false)
+
+        binding.button.setOnClickListener(
+
+            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_testFragment)
+
+        )
 
         return binding.root
     }

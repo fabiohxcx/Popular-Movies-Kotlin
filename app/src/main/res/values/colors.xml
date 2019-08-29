@@ -6,7 +6,7 @@
     <color name="secondaryColor">#607d8b</color>
     <color name="secondaryLightColor">#8eacbb</color>
     <color name="secondaryDarkColor">#34515e</color>
-    <color name="primaryTextColor">#000000</color>
+    <color name="primaryTextColor">#D8D8D8</color>
     <color name="secondaryTextColor">#000000</color>
     <color name="plus_icon_color">#FFFFFFFF</color>
 </resources>
