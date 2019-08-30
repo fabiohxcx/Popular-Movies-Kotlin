@@ -1,4 +1,4 @@
-package com.example.popularmovieskotlin
+package com.example.popularmovieskotlin.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import com.example.popularmovieskotlin.R
 import com.example.popularmovieskotlin.databinding.HomeFragmentBinding
 
 

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.popularmovieskotlin.HomeViewModel" />
+            type="com.example.popularmovieskotlin.home.HomeViewModel" />
     </data>
 
     <LinearLayout

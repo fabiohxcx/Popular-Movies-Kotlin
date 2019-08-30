@@ -1,4 +1,4 @@
-package com.example.popularmovieskotlin
+package com.example.popularmovieskotlin.home
 
 import androidx.lifecycle.ViewModel
 
