@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -31,6 +33,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
     //AppCompat is a set of support libraries which can be used to make the apps developed with newer versions work with older versions.
     implementation "androidx.appcompat:appcompat:$version_appcompat"
@@ -51,9 +54,21 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
 
-    //// ViewModel and LiveData
+    // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel:$version_lifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle"
+
+    //Retrofit https://github.com/square/retrofit
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+
+    //Moshi https://github.com/square/moshi/
+    implementation "com.squareup.moshi:moshi:$version_moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
+
+    //Anko https://github.com/Kotlin/anko
+    implementation "org.jetbrains.anko:anko:$version_anko"
+
 
     //Test Dependencies
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
