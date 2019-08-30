@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.popularmovieskotlin.R
 import com.example.popularmovieskotlin.databinding.HomeFragmentBinding
 
@@ -27,10 +28,12 @@ class HomeFragment : Fragment() {
         val binding = HomeFragmentBinding.inflate(inflater, container, false)
 
         binding.button.setOnClickListener(
-
             Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_testFragment)
-
         )
+/*        Another way to navigate
+        {
+            findNavController().navigate(R.id.action_homeFragment_to_testFragment)
+        }*/
 
         return binding.root
     }

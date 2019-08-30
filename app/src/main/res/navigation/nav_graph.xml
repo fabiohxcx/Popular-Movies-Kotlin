@@ -8,15 +8,20 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.popularmovieskotlin.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment"
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_testFragment"
             app:destination="@id/testFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@+id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/testFragment"
         android:name="com.example.popularmovieskotlin.test.TestFragment"
-        android:label="test_fragment"
+        android:label="Test Fragment"
         tools:layout="@layout/test_fragment" />
 </navigation>
