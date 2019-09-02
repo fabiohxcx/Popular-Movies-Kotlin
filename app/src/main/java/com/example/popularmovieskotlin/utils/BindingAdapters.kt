@@ -1,12 +1,15 @@
 package com.example.popularmovieskotlin.utils
 
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.popularmovieskotlin.R
+import com.example.popularmovieskotlin.home.MovieApiStatus
 import com.example.popularmovieskotlin.home.MovieGridAdapter
 import com.example.popularmovieskotlin.model.Movie
 
@@ -28,3 +31,34 @@ fun bindPosterImage(imgView: ImageView, imgUrl: String?) {
             ).into(imgView)
     }
 }
+
+@BindingAdapter("movieApiError")
+fun bindStatusErrorApi(statusImageView: ImageView, status: MovieApiStatus?) {
+    when (status) {
+        MovieApiStatus.ERROR -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.ic_connection_error)
+        }
+        MovieApiStatus.DONE -> {
+            statusImageView.visibility = View.GONE
+        }
+
+    }
+}
+
+@BindingAdapter("movieApiLoading")
+fun bindStatusLoadingApi(statusProgressBar: ProgressBar, status: MovieApiStatus?) {
+    when (status) {
+        MovieApiStatus.LOADING -> {
+            statusProgressBar.visibility = View.VISIBLE
+        }
+        MovieApiStatus.ERROR -> {
+            statusProgressBar.visibility = View.GONE
+        }
+        MovieApiStatus.DONE -> {
+            statusProgressBar.visibility = View.GONE
+        }
+
+    }
+}
+
