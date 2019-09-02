@@ -331,3 +331,5 @@ $RECYCLE.BIN/
 *.lnk
 
 .cxx
+
+/app/src/main/res/values/api_keys.xml

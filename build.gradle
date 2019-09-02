@@ -19,6 +19,7 @@ buildscript {
         version_retrofit = '2.6.1'
         version_moshi = '1.8.0'
         version_anko = '0.10.8'
+        version_glide = '4.9.0'
     }
 
     repositories {

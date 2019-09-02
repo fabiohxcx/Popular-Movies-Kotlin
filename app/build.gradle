@@ -17,6 +17,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -26,6 +27,14 @@ android {
     }
     dataBinding {
         enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -37,6 +46,8 @@ dependencies {
 
     //AppCompat is a set of support libraries which can be used to make the apps developed with newer versions work with older versions.
     implementation "androidx.appcompat:appcompat:$version_appcompat"
+
+    implementation 'com.android.support:multidex:1.0.3'
 
     //Android KTX
     implementation "androidx.core:core-ktx:$version_core_ktx"
@@ -68,6 +79,10 @@ dependencies {
 
     //Anko https://github.com/Kotlin/anko
     implementation "org.jetbrains.anko:anko:$version_anko"
+
+    //Glide https://github.com/bumptech/glide
+    implementation "com.github.bumptech.glide:glide:$version_glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$version_glide"
 
 
     //Test Dependencies
