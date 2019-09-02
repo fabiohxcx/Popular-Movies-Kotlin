@@ -3,10 +3,9 @@ package com.example.popularmovieskotlin.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.popularmovieskotlin.BuildConfig
 import com.example.popularmovieskotlin.model.Movie
 import com.example.popularmovieskotlin.model.ResultMovies
-import com.example.popularmovieskotlin.network.RetrofitFactory
+import com.example.popularmovieskotlin.network.MoviesApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -46,7 +45,7 @@ class HomeViewModel : ViewModel() {
         coroutineScope.launch {
             try {
                 _statusApi.value = MovieApiStatus.LOADING
-                val response = RetrofitFactory.MoviesApi.retrofitService.getPopularMovies()
+                val response = MoviesApi.retrofitService.getPopularMovies()
 
                 Timber.d("success ${response}")
 

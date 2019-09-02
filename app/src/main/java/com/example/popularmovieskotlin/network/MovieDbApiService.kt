@@ -6,7 +6,6 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -52,15 +51,16 @@ object RetrofitFactory {
 
     private val apiClient = OkHttpClient().newBuilder().addInterceptor(interceptor).build()
 
-    private val retrofit = Retrofit.Builder().client(apiClient)
+    val retrofit = Retrofit.Builder().client(apiClient)
         .baseUrl(BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
-    object MoviesApi {
-        val retrofitService: MovieDbApiService by lazy {
-            retrofit.create(MovieDbApiService::class.java)
-        }
-    }
 
+}
+
+object MoviesApi {
+    val retrofitService: MovieDbApiService by lazy {
+        RetrofitFactory.retrofit.create(MovieDbApiService::class.java)
+    }
 }
