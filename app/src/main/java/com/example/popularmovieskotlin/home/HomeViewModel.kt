@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import timber.log.Timber
 
 class HomeViewModel : ViewModel() {
 
@@ -41,7 +42,7 @@ class HomeViewModel : ViewModel() {
             val response = service.getPopularMovies()
 
             try {
-                Log.d("Fabio", "success ${response}")
+                Timber.d("success ${response}")
 
                 _resultMovies.value = response
 
@@ -50,9 +51,9 @@ class HomeViewModel : ViewModel() {
                 }
 
             } catch (e: HttpException) {
-                Log.d("Fabio", "Exception ${e.message}")
+                Timber.d("Exception ${e.message}")
             } catch (e: Throwable) {
-                Log.d("Fabio", "Ooops: Something else went wrong ${e.message}")
+                Timber.d("Ooops: Something else went wrong ${e.message}")
             }
 
         }

@@ -10,6 +10,7 @@ import com.example.popularmovieskotlin.databinding.GridViewItemBinding
 import com.example.popularmovieskotlin.databinding.HomeFragmentBinding
 
 import com.example.popularmovieskotlin.model.Movie
+import timber.log.Timber
 
 class MovieGridAdapter : ListAdapter<Movie, MovieGridAdapter.MovieViewHolder>(DiffCallback) {
 
@@ -21,7 +22,6 @@ class MovieGridAdapter : ListAdapter<Movie, MovieGridAdapter.MovieViewHolder>(Di
         override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
             return oldItem.id == newItem.id
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -31,7 +31,7 @@ class MovieGridAdapter : ListAdapter<Movie, MovieGridAdapter.MovieViewHolder>(Di
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
         holder.bind(movie)
-        Log.d("Fabio", "${movie.posterPath}")
+        Timber.d("${movie.posterPath}")
     }
 
 

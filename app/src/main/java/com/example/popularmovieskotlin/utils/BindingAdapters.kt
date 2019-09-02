@@ -1,4 +1,4 @@
-package com.example.popularmovieskotlin
+package com.example.popularmovieskotlin.utils
 
 import android.widget.ImageView
 import androidx.core.net.toUri
@@ -6,10 +6,9 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.popularmovieskotlin.R
 import com.example.popularmovieskotlin.home.MovieGridAdapter
 import com.example.popularmovieskotlin.model.Movie
-import com.example.popularmovieskotlin.network.BASE_URL
-import com.example.popularmovieskotlin.utils.MovieUrlUtils
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, movies: List<Movie>?) {

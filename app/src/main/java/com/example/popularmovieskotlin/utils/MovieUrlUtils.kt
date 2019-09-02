@@ -2,6 +2,7 @@ package com.example.popularmovieskotlin.utils
 
 import android.net.Uri
 import android.util.Log
+import timber.log.Timber
 import java.net.URL
 
 class MovieUrlUtils {
@@ -22,7 +23,7 @@ class MovieUrlUtils {
 
             val url = URL(builtUri.toString())
 
-            Log.d("Fabio", "buildUrlPoster: posterPath: " + url.toString() + posterPath);
+            Timber.d("buildUrlPoster: posterPath: " + url.toString() + posterPath);
 
             return url.toString() + posterPath
 
