@@ -35,6 +35,9 @@ fun bindPosterImage(imgView: ImageView, imgUrl: String?) {
 @BindingAdapter("movieApiError")
 fun bindStatusErrorApi(statusImageView: ImageView, status: MovieApiStatus?) {
     when (status) {
+        MovieApiStatus.LOADING -> {
+            statusImageView.visibility = View.GONE
+        }
         MovieApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)

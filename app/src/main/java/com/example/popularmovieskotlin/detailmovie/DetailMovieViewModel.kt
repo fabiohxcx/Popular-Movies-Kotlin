@@ -19,7 +19,7 @@ class DetailMovieViewModel(selectedMovieArg: Movie, app: Application) : AndroidV
     }
 
     val displayReleaseDate = Transformations.map(selectedMovie) {
-        val array = selectedMovie.value!!.releaseDate?.split("-")
+        val array = selectedMovie.value!!.releaseDate.split("-")
         "${array.get(1)}/${array.get(2)}/${array.get(0)}"
     }
 

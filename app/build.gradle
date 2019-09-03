@@ -65,7 +65,8 @@ dependencies {
     //AppCompat is a set of support libraries which can be used to make the apps developed with newer versions work with older versions.
     implementation "androidx.appcompat:appcompat:$version_appcompat"
 
-    implementation 'com.android.support:multidex:1.0.3'
+    //Multidex support
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     //Android KTX
     implementation "androidx.core:core-ktx:$version_core_ktx"
