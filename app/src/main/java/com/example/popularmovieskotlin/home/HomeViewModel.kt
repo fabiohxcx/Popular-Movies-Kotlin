@@ -30,6 +30,10 @@ class HomeViewModel : ViewModel() {
     val statusApi: LiveData<MovieApiStatus>
         get() = _statusApi
 
+    private val _navigateToSelectedMovie = MutableLiveData<Movie>()
+    val navigateToSelectedMovie: LiveData<Movie>
+        get() = _navigateToSelectedMovie
+
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
@@ -64,6 +68,14 @@ class HomeViewModel : ViewModel() {
 
         }
 
+    }
+
+    fun displayMovieDetails(movie: Movie) {
+        _navigateToSelectedMovie.value = movie
+    }
+
+    fun displayMovieDetailsComplete() {
+        _navigateToSelectedMovie.value = null
     }
 
     override fun onCleared() {

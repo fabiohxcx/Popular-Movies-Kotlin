@@ -16,7 +16,7 @@
         tools:context=".MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_movies"
+            android:id="@+id/recyclerview_movies"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"

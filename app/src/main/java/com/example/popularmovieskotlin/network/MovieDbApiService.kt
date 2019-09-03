@@ -9,7 +9,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import java.util.*
 
 const val BASE_URL = "https://api.themoviedb.org/"
 const val VERSION = "3"
@@ -32,35 +31,27 @@ private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
-private val prop = Properties()
-
-
-object RetrofitFactory {
-
-    //creating a Network Interceptor to add api_key in all the request as authInterceptor
-    private val interceptor = Interceptor { chain ->
-        val url = chain.request().url().newBuilder()
-            .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY).build()
-        val request = chain.request()
-            .newBuilder()
-            .url(url)
-            .build()
-        chain.proceed(request)
-    }
-
-
-    private val apiClient = OkHttpClient().newBuilder().addInterceptor(interceptor).build()
-
-    val retrofit = Retrofit.Builder().client(apiClient)
-        .baseUrl(BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
+//creating a Network Interceptor to add api_key in all the request as authInterceptor
+private val interceptor = Interceptor { chain ->
+    val url = chain.request().url().newBuilder()
+        .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY).build()
+    val request = chain.request()
+        .newBuilder()
+        .url(url)
         .build()
-
-
+    chain.proceed(request)
 }
+
+
+private val apiClient = OkHttpClient().newBuilder().addInterceptor(interceptor).build()
+
+private val retrofit = Retrofit.Builder().client(apiClient)
+    .baseUrl(BASE_URL)
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .build()
 
 object MoviesApi {
     val retrofitService: MovieDbApiService by lazy {
-        RetrofitFactory.retrofit.create(MovieDbApiService::class.java)
+        retrofit.create(MovieDbApiService::class.java)
     }
 }

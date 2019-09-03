@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.popularmovieskotlin.R
 import com.example.popularmovieskotlin.databinding.HomeFragmentBinding
 
@@ -32,7 +33,18 @@ class HomeFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        binding.rvMovies.adapter = MovieGridAdapter()
+        binding.recyclerviewMovies.adapter = MovieGridAdapter(MovieGridAdapter.OnClickListener { movie ->
+            viewModel.displayMovieDetails(movie)
+        })
+
+        viewModel.navigateToSelectedMovie.observe(
+            this, Observer {
+                if (null != it) {
+                    this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(it))
+                    viewModel.displayMovieDetailsComplete()
+                }
+            }
+        )
 
 /*        binding.button.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_testFragment)
