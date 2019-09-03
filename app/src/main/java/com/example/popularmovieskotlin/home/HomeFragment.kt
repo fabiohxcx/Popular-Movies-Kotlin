@@ -1,5 +1,6 @@
 package com.example.popularmovieskotlin.home
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.example.popularmovieskotlin.R
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.popularmovieskotlin.databinding.HomeFragmentBinding
 
 
@@ -33,9 +34,17 @@ class HomeFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        var columNumber = when (resources.configuration.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> 5
+            else -> 2
+        }
+
+        binding.recyclerviewMovies.layoutManager = GridLayoutManager(context, columNumber);
+
         binding.recyclerviewMovies.adapter = MovieGridAdapter(MovieGridAdapter.OnClickListener { movie ->
             viewModel.displayMovieDetails(movie)
         })
+
 
         viewModel.navigateToSelectedMovie.observe(
             this, Observer {
