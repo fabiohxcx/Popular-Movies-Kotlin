@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@{viewModel.selectedMovie.releaseDate}"
+            android:text="@{viewModel.displayReleaseDate}"
             app:layout_constraintStart_toEndOf="@+id/poster_imageview"
             app:layout_constraintTop_toBottomOf="@+id/tv_release_date"
             tools:text="08/03/2016" />
