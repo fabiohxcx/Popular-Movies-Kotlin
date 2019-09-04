@@ -2,9 +2,11 @@ package com.example.popularmovieskotlin.model
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
+@JsonClass(generateAdapter = true)
 data class Movie(
     val id: String,
     val title: String,
@@ -21,5 +23,6 @@ data class Movie(
 
     @Json(name = "poster_path")
     val posterPath: String,
+
     val popularity: String
 ) : Parcelable

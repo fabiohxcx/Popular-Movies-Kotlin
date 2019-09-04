@@ -1,11 +1,12 @@
 package com.example.popularmovieskotlin.home
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.popularmovieskotlin.database.getDatabase
 import com.example.popularmovieskotlin.model.Movie
-import com.example.popularmovieskotlin.model.ResultMovies
-import com.example.popularmovieskotlin.network.MoviesApi
+import com.example.popularmovieskotlin.repository.MoviesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -15,16 +16,9 @@ import timber.log.Timber
 
 enum class MovieApiStatus { LOADING, ERROR, DONE }
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     //Declaring LiveDatas
-    private val _movies = MutableLiveData<List<Movie>>()
-    val movies: LiveData<List<Movie>>
-        get() = _movies
-
-    private val _resultMovies = MutableLiveData<ResultMovies>()
-    val resultMovies: LiveData<ResultMovies>
-        get() = _resultMovies
 
     private val _statusApi = MutableLiveData<MovieApiStatus>()
     val statusApi: LiveData<MovieApiStatus>
@@ -40,32 +34,26 @@ class HomeViewModel : ViewModel() {
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
+    private val database = getDatabase(application)
+    private val moviesRepository = MoviesRepository(database)
+
     init {
         getMovies()
     }
+
+    val movies = moviesRepository.movies
 
     private fun getMovies() {
 
         coroutineScope.launch {
             try {
                 _statusApi.value = MovieApiStatus.LOADING
-                val response = MoviesApi.retrofitService.getPopularMovies()
-
-                Timber.d("success ${response}")
-
-                _resultMovies.value = response
-
-                _resultMovies?.let {
-                    _movies.value = it.value?.listMovies
-                }
+                moviesRepository.refreshMovies()
                 _statusApi.value = MovieApiStatus.DONE
-
             } catch (e: Exception) {
                 Timber.d("Exception ${e.message}")
                 _statusApi.value = MovieApiStatus.ERROR
-                _movies.value = ArrayList()
             }
-
         }
 
     }

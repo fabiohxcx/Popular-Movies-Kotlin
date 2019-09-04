@@ -15,6 +15,7 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_movies"
             android:layout_width="0dp"
@@ -22,23 +23,24 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:listData="@{viewModel.movies}"
             tools:itemCount="18"
             tools:listitem="@layout/grid_view_item" />
 
-
         <ImageView
             android:id="@+id/iv_status_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:movieApiError="@{viewModel.statusApi}" />
+            app:movieApiError="@{viewModel.statusApi}"
+            app:srcCompat="@drawable/ic_connection_error" />
 
         <ProgressBar
             android:id="@+id/pb_status"

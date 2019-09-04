@@ -21,6 +21,8 @@ buildscript {
         version_anko = '0.10.8'
         version_glide = '4.9.0'
         version_timber = '4.7.1'
+        version_room = '2.1.0'
+        version_work = '2.2.0'
     }
 
     repositories {
