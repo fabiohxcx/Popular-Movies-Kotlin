@@ -54,7 +54,6 @@ class HomeFragment : Fragment() {
                 }
             }
         )
-
 /*        binding.button.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_testFragment)
         )*/
