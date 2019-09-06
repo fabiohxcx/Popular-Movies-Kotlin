@@ -16,6 +16,18 @@
         tools:context=".MainActivity">
 
 
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/filter_movies"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.469"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:singleSelection="true" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_movies"
             android:layout_width="0dp"
@@ -25,8 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/filter_movies"
             app:listData="@{viewModel.movies}"
             tools:itemCount="18"
             tools:listitem="@layout/grid_view_item" />

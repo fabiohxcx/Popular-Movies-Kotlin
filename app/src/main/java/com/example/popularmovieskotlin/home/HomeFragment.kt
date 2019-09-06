@@ -1,22 +1,19 @@
 package com.example.popularmovieskotlin.home
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.popularmovieskotlin.R
 import com.example.popularmovieskotlin.databinding.HomeFragmentBinding
+import com.google.android.material.chip.Chip
+import org.jetbrains.anko.support.v4.toast
 
 
 class HomeFragment : Fragment() {
@@ -60,6 +57,28 @@ class HomeFragment : Fragment() {
                 }
             }
         )
+
+        val filters = arrayListOf<String>("Popular", "Favorites", "Top rated")
+
+        val chipGroup = binding.filterMovies
+        val inflator = LayoutInflater.from(chipGroup.context)
+
+        val children = filters.map { filter ->
+            val chip = inflator.inflate(R.layout.movie_filter, chipGroup, false) as Chip
+            chip.text = filter
+            chip.tag = filter
+            chip.setOnCheckedChangeListener { button, isChecked ->
+                toast("Clicked")
+            }
+            chip
+        }
+
+        chipGroup.removeAllViews()
+
+        for (chip in children) {
+            chipGroup.addView(chip)
+        }
+
 /*        binding.button.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_testFragment)
         )*/
