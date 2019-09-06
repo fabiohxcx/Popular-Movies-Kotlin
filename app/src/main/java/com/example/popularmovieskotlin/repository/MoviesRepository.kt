@@ -20,6 +20,16 @@ class MoviesRepository(private val database: MoviesDatabase) {
         withContext(Dispatchers.IO) {
             val response = MoviesApi.retrofitService.getPopularMovies()
             database.movieDao.insertAll(*response.asDatabaseModel()) //* -> convert List to varargs parameters
+
+
+            //Deleting old values (values that constains in DB, but not contains on API response anymore)
+            var idList = mutableListOf<String>()
+
+            response.asDatabaseModel().forEach {
+                idList.add(it.id)
+            }
+
+            database.movieDao.deleteOldMovies(idList.toList())
         }
     }
 

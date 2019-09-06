@@ -15,4 +15,7 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg movies: EntityMovie)
 
+    @Query("DELETE FROM entitymovie WHERE EntityMovie.id NOT IN(:listIdMovies)")
+    fun deleteOldMovies(listIdMovies: List<String>)
+
 }

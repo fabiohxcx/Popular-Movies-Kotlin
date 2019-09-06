@@ -1,10 +1,16 @@
 package com.example.popularmovieskotlin.home
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -67,6 +73,8 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
     }
+
 
 }
