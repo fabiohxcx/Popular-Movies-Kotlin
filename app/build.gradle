@@ -54,6 +54,15 @@ android {
     androidExtensions {
         experimental = true
     }
+
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'org.jetbrains.kotlin' && requested.name == 'kotlin-reflect') {
+                details.useVersion kotlin_version
+            }
+        }
+    }
 }
 
 dependencies {
