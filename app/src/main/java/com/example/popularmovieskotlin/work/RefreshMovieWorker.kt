@@ -10,6 +10,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.popularmovieskotlin.database.getDatabase
 import com.example.popularmovieskotlin.repository.MoviesRepository
+import timber.log.Timber
 
 class RefreshMovieWorker(appContext: Context, params: WorkerParameters) : CoroutineWorker(appContext, params) {
 
@@ -22,7 +23,7 @@ class RefreshMovieWorker(appContext: Context, params: WorkerParameters) : Corout
         val repository = MoviesRepository(database)
 
         return try {
-            var builder = NotificationCompat.Builder(applicationContext!!, "channel_id")
+            var builder = NotificationCompat.Builder(applicationContext, "channel_id")
                 .setSmallIcon(android.R.drawable.ic_notification_overlay)
                 .setContentTitle("My notification")
                 .setContentText("Much longer text that cannot fit one line...")
@@ -41,17 +42,18 @@ class RefreshMovieWorker(appContext: Context, params: WorkerParameters) : Corout
                 }
                 // Register the channel with the system
                 val notificationManager: NotificationManager =
-                    applicationContext?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 notificationManager.createNotificationChannel(channel)
             }
 
-            with(NotificationManagerCompat.from(applicationContext!!)) {
+            with(NotificationManagerCompat.from(applicationContext)) {
                 // notificationId is a unique int for each notification that you must define
                 notify(100, builder.build())
             }
 
-
             repository.refreshMovies()
+
+            Timber.d("worker")
             Result.success()
         } catch (throwable: Throwable) {
             Result.retry()

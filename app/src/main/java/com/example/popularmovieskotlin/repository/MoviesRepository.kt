@@ -7,8 +7,10 @@ import com.example.popularmovieskotlin.database.asDomainModel
 import com.example.popularmovieskotlin.model.Movie
 import com.example.popularmovieskotlin.model.asDatabaseModel
 import com.example.popularmovieskotlin.network.MoviesApi
+import com.example.popularmovieskotlin.network.NetworkConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class MoviesRepository(private val database: MoviesDatabase) {
 
@@ -16,11 +18,14 @@ class MoviesRepository(private val database: MoviesDatabase) {
         it.asDomainModel()
     }
 
-    suspend fun refreshMovies() {
+    suspend fun refreshMovies(filter: String = NetworkConstants.POPULAR) {
         withContext(Dispatchers.IO) {
-            val response = MoviesApi.retrofitService.getPopularMovies()
-            database.movieDao.insertAll(*response.asDatabaseModel()) //* -> convert List to varargs parameters
 
+            Timber.d("filter: $filter")
+
+            val response = MoviesApi.retrofitService.getMovies(filter)
+
+            database.movieDao.insertAll(*response.asDatabaseModel()) //* -> convert List to varargs parameters
 
             //Deleting old values (values that constains in DB, but not contains on API response anymore)
             var idList = mutableListOf<String>()

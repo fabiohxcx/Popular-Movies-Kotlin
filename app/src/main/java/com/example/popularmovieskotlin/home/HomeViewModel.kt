@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.popularmovieskotlin.database.getDatabase
 import com.example.popularmovieskotlin.model.Movie
+import com.example.popularmovieskotlin.network.NetworkConstants
 import com.example.popularmovieskotlin.repository.MoviesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,14 +42,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         getMovies()
     }
 
-    val movies = moviesRepository.movies
+    var movies = moviesRepository.movies
 
-    private fun getMovies() {
+    fun getMovies(filter: String = NetworkConstants.POPULAR) {
 
         coroutineScope.launch {
             try {
                 _statusApi.value = MovieApiStatus.LOADING
-                moviesRepository.refreshMovies()
+                moviesRepository.refreshMovies(filter)
                 _statusApi.value = MovieApiStatus.DONE
             } catch (e: Exception) {
                 Timber.d("Exception ${e.message}")

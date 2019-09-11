@@ -25,7 +25,7 @@ class DetailMovieFragment : Fragment() {
         /* Sets the LifecycleOwner that should be used for observing changes of LiveData in this binding.
         If a LiveData is in one of the binding expressions and no LifecycleOwner is set, the LiveData will
         not be observed and updates to it will not be propagated to the UI. */
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         val movieSelected = DetailMovieFragmentArgs.fromBundle(arguments!!).selectedMovie
 

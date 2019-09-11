@@ -23,7 +23,7 @@ class MovieUrlUtils {
 
             val url = URL(builtUri.toString())
 
-            Timber.d("buildUrlPoster: posterPath: " + url.toString() + posterPath);
+            Timber.d("buildUrlPoster: posterPath: " + url.toString() + posterPath)
 
             return url.toString() + posterPath
 

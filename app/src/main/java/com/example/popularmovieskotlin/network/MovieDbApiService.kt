@@ -2,6 +2,7 @@ package com.example.popularmovieskotlin.network
 
 import com.example.popularmovieskotlin.BuildConfig
 import com.example.popularmovieskotlin.model.ResultMovies
+import com.example.popularmovieskotlin.network.NetworkConstants.Companion.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Interceptor
@@ -9,21 +10,29 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
-const val BASE_URL = "https://api.themoviedb.org/"
-const val VERSION = "3"
-const val PAGE = "page"
-const val MOVIE = "movie"
-const val VIDEOS = "videos"
-const val REVIEWS = "reviews"
-const val POPULAR = "popular"
-const val FAVORITES = "favorites"
-const val TOP_RATED = "top_rated"
+class NetworkConstants {
+    companion object {
+        const val BASE_URL = "https://api.themoviedb.org/"
+        const val VERSION = "3"
+        const val PAGE = "page"
+        const val MOVIE = "movie"
+        const val VIDEOS = "videos"
+        const val REVIEWS = "reviews"
+        const val POPULAR = "popular"
+        const val FAVORITES = "favorites"
+        const val TOP_RATED = "top_rated"
+    }
+}
 
 interface MovieDbApiService {
 
     @GET("3/movie/popular")
     suspend fun getPopularMovies(): ResultMovies
+
+    @GET("3/movie/{filter}")
+    suspend fun getMovies(@Path("filter") filter: String): ResultMovies
 
 }
 

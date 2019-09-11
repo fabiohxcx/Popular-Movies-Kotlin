@@ -5,8 +5,8 @@
     style="@style/Widget.MaterialComponents.Chip.Choice"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    app:checkedIconEnabled="true"
     app:checkedIconVisible="true"
-    app:chipMinTouchTargetSize="40dp"
     app:chipBackgroundColor="@color/primaryLightColor"
-    tools:checked="true"
-    app:checkedIconEnabled="true" />
+    app:chipMinTouchTargetSize="40dp"
+    tools:checked="true" />

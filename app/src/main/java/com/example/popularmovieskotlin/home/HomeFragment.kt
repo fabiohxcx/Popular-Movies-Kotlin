@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.popularmovieskotlin.R
 import com.example.popularmovieskotlin.databinding.HomeFragmentBinding
+import com.example.popularmovieskotlin.network.NetworkConstants
 import com.google.android.material.chip.Chip
-import org.jetbrains.anko.support.v4.toast
 
 
 class HomeFragment : Fragment() {
@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
 
         val binding = HomeFragmentBinding.inflate(inflater)
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
 
@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
             else -> 2
         }
 
-        binding.recyclerviewMovies.layoutManager = GridLayoutManager(context, columNumber);
+        binding.recyclerviewMovies.layoutManager = GridLayoutManager(context, columNumber)
 
         binding.recyclerviewMovies.adapter = MovieGridAdapter(MovieGridAdapter.OnClickListener { movie ->
             viewModel.displayMovieDetails(movie)
@@ -65,10 +65,18 @@ class HomeFragment : Fragment() {
 
         val children = filters.map { filter ->
             val chip = inflator.inflate(R.layout.movie_filter, chipGroup, false) as Chip
+
             chip.text = filter
             chip.tag = filter
-            chip.setOnCheckedChangeListener { button, isChecked ->
-                toast("Clicked")
+            chip.setOnCheckedChangeListener { button, checked ->
+                if (checked) {
+                    viewModel.getMovies(
+                        when (button.tag) {
+                            "Top rated" -> NetworkConstants.TOP_RATED
+                            else -> NetworkConstants.POPULAR
+                        }
+                    )
+                }
             }
             chip
         }
@@ -87,12 +95,8 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_testFragment)
         }*/
 
+
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
     }
 
 
