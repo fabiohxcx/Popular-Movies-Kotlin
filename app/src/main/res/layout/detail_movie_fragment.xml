@@ -128,6 +128,16 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_overview"
             tools:text="From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences." />
 
+        <TextView
+            android:id="@+id/trailers_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@{viewModel.trailers.toString()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_overview_description" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -6,6 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.popularmovieskotlin.model.Movie
+import com.example.popularmovieskotlin.model.Trailer
+import com.example.popularmovieskotlin.network.MoviesApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class DetailMovieViewModel(selectedMovieArg: Movie, app: Application) : AndroidViewModel(app) {
 
@@ -13,9 +20,31 @@ class DetailMovieViewModel(selectedMovieArg: Movie, app: Application) : AndroidV
     val selectedMovie: LiveData<Movie>
         get() = _selectedMovie
 
+    private val _trailers = MutableLiveData<List<Trailer>>()
+    val trailers: LiveData<List<Trailer>>
+        get() = _trailers
+
+    // Create a Coroutine scope using a job to be able to cancel when needed
+    private var viewModelJob = Job()
+
+    // the Coroutine runs using the Main (UI) dispatcher
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
 
     init {
         _selectedMovie.value = selectedMovieArg
+
+        coroutineScope.launch {
+            try {
+                val result = MoviesApi.retrofitService.getTrailers(selectedMovie.value?.id.toString())
+
+                _trailers.value = result.trailers
+
+            } catch (e: Exception) {
+                Timber.d("Exception ${e.message}")
+            }
+        }
+
     }
 
     val displayReleaseDate = Transformations.map(selectedMovie) {

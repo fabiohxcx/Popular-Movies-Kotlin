@@ -2,6 +2,7 @@ package com.example.popularmovieskotlin.network
 
 import com.example.popularmovieskotlin.BuildConfig
 import com.example.popularmovieskotlin.model.ResultMovies
+import com.example.popularmovieskotlin.model.ResultTrailers
 import com.example.popularmovieskotlin.network.NetworkConstants.Companion.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -33,6 +34,9 @@ interface MovieDbApiService {
 
     @GET("3/movie/{filter}")
     suspend fun getMovies(@Path("filter") filter: String): ResultMovies
+
+    @GET("3/movie/{id}/videos")
+    suspend fun getTrailers(@Path("id") id: String): ResultTrailers
 
 }
 
