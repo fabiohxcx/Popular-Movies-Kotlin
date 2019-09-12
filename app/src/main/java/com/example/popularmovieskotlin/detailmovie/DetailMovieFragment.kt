@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popularmovieskotlin.databinding.DetailMovieFragmentBinding
+import org.jetbrains.anko.support.v4.toast
 
 class DetailMovieFragment : Fragment() {
 
@@ -32,6 +34,13 @@ class DetailMovieFragment : Fragment() {
         val viewModelFactory = DetailMovieViewModelFactory(movieSelected, application)
 
         binding.viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailMovieViewModel::class.java)
+
+
+        binding.recyclerviewTrailers.layoutManager = LinearLayoutManager(context)
+
+        binding.recyclerviewTrailers.adapter = TrailersAdapter(TrailersAdapter.OnClickListener {
+            toast("${it.name}")
+        })
 
         return binding.root
     }

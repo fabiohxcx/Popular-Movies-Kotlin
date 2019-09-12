@@ -9,14 +9,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.popularmovieskotlin.R
+import com.example.popularmovieskotlin.detailmovie.TrailersAdapter
 import com.example.popularmovieskotlin.home.MovieApiStatus
 import com.example.popularmovieskotlin.home.MovieGridAdapter
 import com.example.popularmovieskotlin.model.Movie
+import com.example.popularmovieskotlin.model.Trailer
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, movies: List<Movie>?) {
     val adapter = recyclerView.adapter as MovieGridAdapter
     adapter.submitList(movies)
+}
+
+@BindingAdapter("listData")
+fun binRecylerView(recyclerView: RecyclerView, trailer: List<Trailer>?) {
+    val adapter = recyclerView.adapter as TrailersAdapter
+    adapter.submitList(trailer)
 }
 
 @BindingAdapter("imageUrl")
