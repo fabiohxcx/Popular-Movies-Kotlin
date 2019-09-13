@@ -1,5 +1,8 @@
 package com.example.popularmovieskotlin.detailmovie
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popularmovieskotlin.databinding.DetailMovieFragmentBinding
-import org.jetbrains.anko.support.v4.toast
+
 
 class DetailMovieFragment : Fragment() {
 
@@ -39,7 +42,15 @@ class DetailMovieFragment : Fragment() {
         binding.recyclerviewTrailers.layoutManager = LinearLayoutManager(context)
 
         binding.recyclerviewTrailers.adapter = TrailersAdapter(TrailersAdapter.OnClickListener {
-            toast("${it.name}")
+            val appIntent = Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:${it.key}"))
+
+            try {
+                context?.startActivity(appIntent)
+            } catch (ex: ActivityNotFoundException) {
+                //context?.startActivity(webIntent)
+            }
+
+
         })
 
         return binding.root
