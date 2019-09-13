@@ -10,137 +10,184 @@
             type="com.example.popularmovieskotlin.detailmovie.DetailMovieViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".detailmovie.DetailMovieFragment">
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".detailmovie.DetailMovieFragment">
 
 
-        <ImageView
-            android:id="@+id/poster_imageview"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            app:imageUrl="@{viewModel.selectedMovie.posterPath}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            <ImageView
+                android:id="@+id/poster_imageview"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                app:imageUrl="@{viewModel.selectedMovie.posterPath}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/tv_movie_title"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Title"
-            android:textColor="@color/primaryColor"
-            app:layout_constraintStart_toEndOf="@+id/poster_imageview"
-            app:layout_constraintTop_toTopOf="@+id/poster_imageview" />
+            <TextView
+                android:id="@+id/tv_movie_title"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Title"
+                android:textColor="@color/primaryColor"
+                app:layout_constraintStart_toEndOf="@+id/poster_imageview"
+                app:layout_constraintTop_toTopOf="@+id/poster_imageview" />
 
-        <TextView
-            android:id="@+id/tv_movie_title_description"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{viewModel.selectedMovie.title}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/poster_imageview"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_title"
-            tools:text="Suicide Squad" />
+            <TextView
+                android:id="@+id/tv_movie_title_description"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{viewModel.selectedMovie.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/poster_imageview"
+                app:layout_constraintTop_toBottomOf="@+id/tv_movie_title"
+                tools:text="Suicide Squad" />
 
-        <TextView
-            android:id="@+id/tv_release_date_description"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@{viewModel.displayReleaseDate}"
-            app:layout_constraintStart_toEndOf="@+id/poster_imageview"
-            app:layout_constraintTop_toBottomOf="@+id/tv_release_date"
-            tools:text="08/03/2016" />
+            <TextView
+                android:id="@+id/tv_release_date_description"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@{viewModel.displayReleaseDate}"
+                app:layout_constraintStart_toEndOf="@+id/poster_imageview"
+                app:layout_constraintTop_toBottomOf="@+id/tv_release_date"
+                tools:text="08/03/2016" />
 
-        <TextView
-            android:id="@+id/tv_release_date"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Release Date"
-            android:textColor="@color/primaryColor"
-            app:layout_constraintStart_toEndOf="@+id/poster_imageview"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_title_description" />
+            <TextView
+                android:id="@+id/tv_release_date"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Release Date"
+                android:textColor="@color/primaryColor"
+                app:layout_constraintStart_toEndOf="@+id/poster_imageview"
+                app:layout_constraintTop_toBottomOf="@+id/tv_movie_title_description" />
 
-        <TextView
-            android:id="@+id/tv_popularity_description"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@{viewModel.selectedMovie.popularity}"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_popularity"
-            app:layout_constraintStart_toEndOf="@+id/tv_popularity"
-            app:layout_constraintTop_toTopOf="@+id/tv_popularity"
-            tools:text="48.261451" />
+            <TextView
+                android:id="@+id/tv_popularity_description"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.selectedMovie.popularity}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_popularity"
+                app:layout_constraintStart_toEndOf="@+id/tv_popularity"
+                app:layout_constraintTop_toTopOf="@+id/tv_popularity"
+                tools:text="48.261451" />
 
-        <TextView
-            android:id="@+id/tv_popularity"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Popularity"
-            android:textColor="@color/primaryColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/poster_imageview" />
+            <TextView
+                android:id="@+id/tv_popularity"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Popularity"
+                android:textColor="@color/primaryColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/poster_imageview" />
 
-        <TextView
-            android:id="@+id/tv_overview"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Overview"
-            android:textColor="@color/primaryColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_popularity" />
+            <TextView
+                android:id="@+id/tv_overview"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Overview"
+                android:textColor="@color/primaryColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_popularity" />
 
-        <TextView
-            android:id="@+id/tv_overview_description"
-            style="@style/TextAppearance.MaterialComponents.Body1"
-            android:layout_width="0dp"
-            android:layout_height="98dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{viewModel.selectedMovie.overview}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_overview"
-            tools:text="From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences." />
+            <TextView
+                android:id="@+id/tv_overview_description"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="0dp"
+                android:layout_height="98dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{viewModel.selectedMovie.overview}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_overview"
+                tools:text="From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences." />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_trailers"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_overview_description"
-            app:listData="@{viewModel.trailers}"
-            tools:listitem="@layout/trailers_view_item" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_trailers"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_trailers"
+                app:listData="@{viewModel.trailers}"
+                tools:itemCount="3"
+                tools:listitem="@layout/trailers_view_item" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_trailers"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Trailers"
+                android:textColor="@color/primaryColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_overview_description" />
 
+            <TextView
+                android:id="@+id/tv_reviews"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Reviews"
+                android:textColor="@color/primaryColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerview_trailers" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_review"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_reviews"
+                app:listData="@{viewModel.reviews}"
+                tools:itemCount="3"
+                tools:listitem="@layout/review_view_item" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </layout>

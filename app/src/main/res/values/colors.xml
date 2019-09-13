@@ -10,4 +10,5 @@
     <color name="secondaryTextColor">#757575</color>
     <color name="plus_icon_color">#FFFFFFFF</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bg_light">#DBF2F7</color>
 </resources>

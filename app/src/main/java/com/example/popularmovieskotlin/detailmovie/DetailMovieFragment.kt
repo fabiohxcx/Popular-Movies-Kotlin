@@ -49,9 +49,12 @@ class DetailMovieFragment : Fragment() {
             } catch (ex: ActivityNotFoundException) {
                 //context?.startActivity(webIntent)
             }
-
-
         })
+
+        binding.recyclerviewReview.layoutManager = LinearLayoutManager(context)
+
+        binding.recyclerviewReview.adapter = ReviewsAdapter()
+
 
         return binding.root
     }

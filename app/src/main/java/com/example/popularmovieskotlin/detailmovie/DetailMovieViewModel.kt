@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.popularmovieskotlin.model.Movie
+import com.example.popularmovieskotlin.model.Review
 import com.example.popularmovieskotlin.model.Trailer
 import com.example.popularmovieskotlin.network.MoviesApi
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +25,10 @@ class DetailMovieViewModel(selectedMovieArg: Movie, app: Application) : AndroidV
     val trailers: LiveData<List<Trailer>>
         get() = _trailers
 
+    private val _reviews = MutableLiveData<List<Review>>()
+    val reviews: LiveData<List<Review>>
+        get() = _reviews
+
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
@@ -36,9 +41,15 @@ class DetailMovieViewModel(selectedMovieArg: Movie, app: Application) : AndroidV
 
         coroutineScope.launch {
             try {
-                val result = MoviesApi.retrofitService.getTrailers(selectedMovie.value?.id.toString())
 
-                _trailers.value = result.trailers
+                selectedMovie.value?.let {
+                    val result = MoviesApi.retrofitService.getTrailers(it.id)
+                    _trailers.value = result.trailers
+
+                    val resultReviews = MoviesApi.retrofitService.getReviews(it.id)
+                    _reviews.value = resultReviews.results
+                    Timber.d("Reviews: " + resultReviews.results.toString())
+                }
 
             } catch (e: Exception) {
                 Timber.d("Exception ${e.message}")
