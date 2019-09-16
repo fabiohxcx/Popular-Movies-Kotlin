@@ -11,9 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popularmovieskotlin.databinding.DetailMovieFragmentBinding
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
 class DetailMovieFragment : Fragment() {
+
+    private lateinit var viewModel: DetailMovieViewModel
 
     companion object {
         fun newInstance() = DetailMovieFragment()
@@ -36,8 +39,9 @@ class DetailMovieFragment : Fragment() {
 
         val viewModelFactory = DetailMovieViewModelFactory(movieSelected, application)
 
-        binding.viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailMovieViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailMovieViewModel::class.java)
 
+        binding.viewModel = viewModel
 
         binding.recyclerviewTrailers.layoutManager = LinearLayoutManager(context)
 
@@ -54,6 +58,10 @@ class DetailMovieFragment : Fragment() {
         binding.recyclerviewReview.layoutManager = LinearLayoutManager(context)
 
         binding.recyclerviewReview.adapter = ReviewsAdapter()
+
+        binding.ivFavorite.onClick {
+            viewModel.clickFavorite()
+        }
 
 
         return binding.root
