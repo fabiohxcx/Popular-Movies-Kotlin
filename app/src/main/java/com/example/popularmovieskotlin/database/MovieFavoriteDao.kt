@@ -1,13 +1,12 @@
 package com.example.popularmovieskotlin.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
 interface MovieFavoriteDao {
 
     @Query("select * from entitymoviefavorite")
-    fun getMoviesFavorite(): LiveData<List<EntityMovieFavorite>>
+    fun getMoviesFavorite(): List<EntityMovie>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg movies: EntityMovieFavorite)

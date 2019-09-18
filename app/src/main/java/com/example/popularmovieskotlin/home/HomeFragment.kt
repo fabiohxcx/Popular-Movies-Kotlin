@@ -73,6 +73,7 @@ class HomeFragment : Fragment() {
                     viewModel.getMovies(
                         when (button.tag) {
                             "Top rated" -> NetworkConstants.TOP_RATED
+                            "Favorites" -> NetworkConstants.FAVORITES
                             else -> NetworkConstants.POPULAR
                         }
                     )

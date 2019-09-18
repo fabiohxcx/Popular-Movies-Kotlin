@@ -42,14 +42,16 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         getMovies()
     }
 
-    var movies = moviesRepository.movies
+    val movies = moviesRepository.movies
 
     fun getMovies(filter: String = NetworkConstants.POPULAR) {
 
         coroutineScope.launch {
             try {
                 _statusApi.value = MovieApiStatus.LOADING
+
                 moviesRepository.refreshMovies(filter)
+
                 _statusApi.value = MovieApiStatus.DONE
             } catch (e: Exception) {
                 Timber.d("Exception ${e.message}")

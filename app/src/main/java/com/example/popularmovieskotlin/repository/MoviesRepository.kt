@@ -23,18 +23,37 @@ class MoviesRepository(private val database: MoviesDatabase) {
 
             Timber.d("filter: $filter")
 
-            val response = MoviesApi.retrofitService.getMovies(filter)
+            if (filter.equals(NetworkConstants.FAVORITES)) {
 
-            database.movieDao.insertAll(*response.asDatabaseModel()) //* -> convert List to varargs parameters
+                val response = database.movieFavoriteDao.getMoviesFavorite()
 
-            //Deleting old values (values that constains in DB, but not contains on API response anymore)
-            var idList = mutableListOf<String>()
+                database.movieDao.insertAll(*response.toTypedArray()) //* -> convert List to varargs parameters
 
-            response.asDatabaseModel().forEach {
-                idList.add(it.id)
+                //Deleting old values (values that constains in DB, but not contains on API response anymore)
+                var idList = mutableListOf<String>()
+
+                response.forEach {
+                    idList.add(it.id)
+                }
+
+                database.movieDao.deleteOldMovies(idList.toList())
+
+            } else {
+                val response = MoviesApi.retrofitService.getMovies(filter)
+
+                database.movieDao.insertAll(*response.asDatabaseModel()) //* -> convert List to varargs parameters
+
+                //Deleting old values (values that constains in DB, but not contains on API response anymore)
+                var idList = mutableListOf<String>()
+
+                response.asDatabaseModel().forEach {
+                    idList.add(it.id)
+                }
+
+                database.movieDao.deleteOldMovies(idList.toList())
             }
 
-            database.movieDao.deleteOldMovies(idList.toList())
+
         }
     }
 
