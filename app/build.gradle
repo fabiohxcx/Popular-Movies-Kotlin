@@ -115,6 +115,7 @@ dependencies {
 
     //Anko https://github.com/Kotlin/anko
     implementation "org.jetbrains.anko:anko:$version_anko"
+    api "org.jetbrains.anko:anko-commons:$version_anko"
 
     //Glide https://github.com/bumptech/glide
     implementation "com.github.bumptech.glide:glide:$version_glide"

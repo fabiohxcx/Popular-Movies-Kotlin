@@ -35,6 +35,8 @@ class DetailMovieFragment : Fragment() {
         not be observed and updates to it will not be propagated to the UI. */
         binding.lifecycleOwner = this
 
+        DetailObserver(this.lifecycle, context)
+
         val movieSelected = DetailMovieFragmentArgs.fromBundle(arguments!!).selectedMovie
 
         val viewModelFactory = DetailMovieViewModelFactory(movieSelected, application)
